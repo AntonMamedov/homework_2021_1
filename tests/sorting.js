@@ -158,4 +158,32 @@ QUnit.module('Тестируем функцию sorting', function() {
         assert.throws(() => sorting(NaN, {}),
             new TypeError('non-volatile data'));
     });
+
+    QUnit.test('Проверка случая, когда в качестве свойств подаются строки на английском и русском', function(assert) {
+
+        const initial = [
+            { prop1: 3, id: '1' },
+            { prop1: 3, id: '2' },
+            { prop1: 1, id: '1' },
+            { prop1: 1, id: '2' },
+            { prop1: 4, id: '1' },
+            { prop1: 4, id: '2' },
+            { prop1: 2, id: '1' },
+            { prop1: 2, id: '2' }
+        ];
+        const actual = sorting(initial, ['id', 'prop1', '123', 'ёпрст']);
+
+        const expected = [
+            { prop1: 1, id: '1' },
+            { prop1: 2, id: '1' },
+            { prop1: 3, id: '1' },
+            { prop1: 4, id: '1' },
+            { prop1: 1, id: '2' },
+            { prop1: 2, id: '2' },
+            { prop1: 3, id: '2' },
+            { prop1: 4, id: '2' }
+        ];
+
+        assert.deepEqual(actual, expected);
+    });
 });
