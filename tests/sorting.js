@@ -4,7 +4,6 @@ QUnit.module('Тестируем функцию sorting', function() {
     QUnit.test('sorting не меняет пустой массив', function(assert) {
         const initial = [];
         const actual = sorting(initial, []);
-
         const expected = [];
 
         assert.deepEqual(actual, expected);
@@ -148,40 +147,38 @@ QUnit.module('Тестируем функцию sorting', function() {
         assert.deepEqual(actual, expected);
     });
 
-    QUnit.test('Проверка случая, когда на вход подается не массив, а целое число', function(assert) {
+    QUnit.test('Проверка на невалидные данные', function(assert) {
         const initial = 5;
         assert.throws(() => sorting(5, {}),
             new TypeError('non-volatile data'));
-    });
-
-    QUnit.test('Проверка случая, когда на вход подается NaN', function(assert) {
         assert.throws(() => sorting(NaN, {}),
             new TypeError('non-volatile data'));
     });
 
-    QUnit.test('Проверка случая, когда в качестве свойств подаются строки на английском и русском', function(assert) {
+
+    QUnit.test('Проверка валидность сортировки при наличии utf8 символов', function(assert) {
 
         const initial = [
             { prop1: 3, id: '1' },
             { prop1: 3, id: '2' },
-            { prop1: 1, id: '1' },
+            { prop1: 1, id: 'аааё' },
             { prop1: 1, id: '2' },
             { prop1: 4, id: '1' },
             { prop1: 4, id: '2' },
-            { prop1: 2, id: '1' },
+            { prop1: 2, id: 'бббё' },
             { prop1: 2, id: '2' }
         ];
-        const actual = sorting(initial, ['id', 'prop1', '123', 'ёпрст']);
+        const actual = sorting(initial, ['id', 'prop1', '123']);
 
         const expected = [
-            { prop1: 1, id: '1' },
-            { prop1: 2, id: '1' },
             { prop1: 3, id: '1' },
             { prop1: 4, id: '1' },
             { prop1: 1, id: '2' },
             { prop1: 2, id: '2' },
             { prop1: 3, id: '2' },
-            { prop1: 4, id: '2' }
+            { prop1: 4, id: '2' },
+            { prop1: 1, id: 'аааё' },
+            { prop1: 2, id: 'бббё' }
         ];
 
         assert.deepEqual(actual, expected);
