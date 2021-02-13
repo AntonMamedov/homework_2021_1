@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 /**
  * Функция принимает на вход массив plain-объектов и массив имён свойств,
  * по которым необходимо отсортировать массив объектов,
@@ -7,17 +7,17 @@
  *
  * @param {Array} objArr - исходный массив, который сортируется
  * @param {Array} propName - массив имен свойств, по которым проводится сортировка
- *
+ * @returns {Array} - возвращает отсортированный массив
  * @throws {TypeError} - выбрасывает ошибку, если на вход приходят не массивы
  */
-let sorting = (objArr, propName) => {
+const sorting = (objArr, propName) => {
     if (!Array.isArray(objArr) || !Array.isArray(propName)) {
         throw new TypeError("non-volatile data");
     }
     return objArr.sort((left, right) => {
-        for (let prop of propName) {
+        for (const prop of propName) {
             if (left[prop] < right[prop]) return -1;
-            else if (left[prop] > right[prop]) return 1;
+            if (left[prop] > right[prop]) return 1;
         }
         return 0;
     });
