@@ -149,9 +149,9 @@ QUnit.module('Тестируем функцию sorting', function() {
 
     QUnit.test('Проверка на невалидные данные', function(assert) {
         assert.throws(() => sorting(5, {}),
-            new TypeError('non-volatile data'));
+            new TypeError('Non-volatile data'));
         assert.throws(() => sorting(NaN, {}),
-            new TypeError('non-volatile data'));
+            new TypeError('Non-volatile data'));
     });
 
 

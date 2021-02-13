@@ -12,7 +12,7 @@
  */
 const sorting = (objArr, propName) => {
     if (!Array.isArray(objArr) || !Array.isArray(propName)) {
-        throw new TypeError("non-volatile data");
+        throw new TypeErro('Non-volatile data');
     }
     return objArr.sort((left, right) => {
         for (const prop of propName) {
