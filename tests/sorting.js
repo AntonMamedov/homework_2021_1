@@ -148,13 +148,14 @@ QUnit.module('Тестируем функцию sorting', function() {
         assert.deepEqual(actual, expected);
     });
 
-    QUnit.test('невалидный значения', function(assert) {
-
+    QUnit.test('Проверка случая, когда на вход подается не массив, а целое число', function(assert) {
         const initial = 5;
-        try {
-            sorting(initial, []);
-        } catch (err) {
-            assert.deepEqual(err, "non-volatile data");
-        }
+        assert.throws(() => sorting(5, {}),
+            new TypeError('non-volatile data'));
+    });
+
+    QUnit.test('Проверка случая, когда на вход подается NaN', function(assert) {
+        assert.throws(() => sorting(NaN, {}),
+            new TypeError('non-volatile data'));
     });
 });
