@@ -147,4 +147,14 @@ QUnit.module('Тестируем функцию sorting', function() {
 
         assert.deepEqual(actual, expected);
     });
+
+    QUnit.test('невалидный значения', function(assert) {
+
+        const initial = 5;
+        try {
+            sorting(initial, []);
+        } catch (err) {
+            assert.deepEqual(err, "non-volatile data");
+        }
+    });
 });

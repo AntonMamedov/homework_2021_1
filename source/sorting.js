@@ -1,20 +1,19 @@
-function sorting(objArr, propName) {
-    for (let i = 0; i < objArr.length; ++i)
-        objArr[i] = [objArr[i], i];
-
-    function comparator(a, b) {
-        for (let prop of propName) {
-            if (a[0][prop] < b[0][prop])
-                return -1;
-            else if (a[0][prop] > b[0][prop])
-                return 1;
-        }
-        return a[1] - b[1];
+let sorting = (objArr, propName) => {
+    if (Array.isArray(objArr) && Array.isArray(propName)) {
+        objArr.sort((left, right) => {
+            for (let prop of propName) {
+                //Не получиься применить тернарный оператор, потому что
+                //отрицанием < является >= а в данном случае = должно обрабатываться отдельно
+                //Данный метод итерации по массиву представляется мне наиболее лаконичным, не вижу смысла использовать форич
+                if (left[prop] < right[prop])
+                    return -1;
+                else if (left[prop] > right[prop])
+                    return 1;
+            }
+            return 0;
+        });
+        return objArr;
+    } else {
+        throw "non-volatile data";
     }
-    objArr.sort(comparator);
-
-    for (let i = 0; i < objArr.length; ++i)
-        objArr[i] = objArr[i][0];
-    return objArr;
-
 }
