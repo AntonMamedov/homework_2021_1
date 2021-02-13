@@ -16,10 +16,8 @@ let sorting = (objArr, propName) => {
     }
     return objArr.sort((left, right) => {
         for (let prop of propName) {
-            if (left[prop] < right[prop])
-                return -1;
-            else if (left[prop] > right[prop])
-                return 1;
+            if (left[prop] < right[prop]) return -1;
+            else if (left[prop] > right[prop]) return 1;
         }
         return 0;
     });
